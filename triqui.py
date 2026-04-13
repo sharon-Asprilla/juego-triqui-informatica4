@@ -15,7 +15,7 @@ def printIntro(introFile):
 
         Ejemplos de uso:
 
-            >>> printIntro("intro.txt")
+            printIntro("intro.txt")
 
             ████████╗██████╗ ██╗ ██████╗ ██╗   ██╗██╗
             ╚══██╔══╝██╔══██╗██║██╔═══██╗██║   ██║██║
@@ -27,6 +27,13 @@ def printIntro(introFile):
 
     # Desarrolle el cuerpo de la función aquí...
 
+    #"comentarios mios" se abre  el archivo con with palabra reseveda que hace que cierre el codigo  en modo lectura ("r") usando codificación UTF-8
+    # aqui permite leer correctamente los caracteres especiales del banner ASCII
+    with open(introFile, "r", encoding="utf-8") as archivo:
+        # se lee con la funcion read  todo el contenido del archivo y lo guardamos en la variable 'contenido'
+        contenido = archivo.read()
+    print(contenido)
+
 
     pass
 
@@ -36,6 +43,7 @@ def drawBoard(board):
     # Board: Lista de strings que representa el estado del tablero
 
     # Desarrolle el cuerpo de la función aquí...
+    
     pass
 
 def inputPlayerLetter():
