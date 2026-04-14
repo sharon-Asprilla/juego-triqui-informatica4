@@ -9,7 +9,7 @@ turn ="" # Indica quién tiene el turno para jugar, el usuario o la computadora.
 while True:
 
     # 2. Crear el tablero
-    tablero = [' '] * 10
+    tablero = [' '] * 9
     # 3. El usuario debe seleccionar la marca
     # 4. Quién va primero el usuario o la computadora?
 
