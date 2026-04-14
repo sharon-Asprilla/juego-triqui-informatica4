@@ -47,6 +47,12 @@ def drawBoard(board):
     pass
 
 def inputPlayerLetter():
+    
+    while True:
+        simbolo = input("Digite el simbolo con el que desea jugar (X o O)").upper()
+        if simbolo == "X" or simbolo == "O":
+            break
+
     # Esta función le permite escoger al usuario entre la letra "X" y la letra "O".
 
     # retorna una lista de strings donde la letra escogida por el usuario

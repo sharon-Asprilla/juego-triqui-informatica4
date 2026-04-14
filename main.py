@@ -11,8 +11,8 @@ while True:
     # 2. Crear el tablero
     tablero = [' '] * 9
     # 3. El usuario debe seleccionar la marca
-    usuario= input("ingresa un opcion (X o O)")
-    inputPlayerLetter()
+    
+    t.inputPlayerLetter()
     # 4. Quién va primero el usuario o la computadora?
 
 
@@ -57,3 +57,4 @@ while True:
 
     # 7. Preguntar si el usuario quiere jugar una vez mas
     #    Si no, finalizar el programa.
+
