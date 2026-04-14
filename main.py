@@ -1,4 +1,4 @@
-import triqui as tr
+
 import triqui as t
 
 # 1. Mostrar mensaje de bienvenida
@@ -11,7 +11,10 @@ while True:
     # 2. Crear el tablero
     tablero = [' '] * 9
     # 3. El usuario debe seleccionar la marca
+    usuario= input("ingresa un opcion (X o O)")
+    inputPlayerLetter()
     # 4. Quién va primero el usuario o la computadora?
+
 
     print(turn + ' va primero.')
 
