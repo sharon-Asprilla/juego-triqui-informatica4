@@ -43,15 +43,23 @@ def drawBoard(board):
     # Board: Lista de strings que representa el estado del tablero
 
     # Desarrolle el cuerpo de la función aquí...
-    
+
+   
+    print(f"| {board[0]} | {board[1]} | {board[2]} |")
+    print("-------------")
+    print(f"| {board[3]} | {board[4]} | {board[5]} |")
+    print("-------------")
+    print(f"| {board[6]} | {board[7]} | {board[8]} |")
+    return [" "] * 9
+
+  
+
+
     pass
 
 def inputPlayerLetter():
     
-    while True:
-        simbolo = input("Digite el simbolo con el que desea jugar (X o O)").upper()
-        if simbolo == "X" or simbolo == "O":
-            break
+
 
     # Esta función le permite escoger al usuario entre la letra "X" y la letra "O".
 
@@ -60,6 +68,16 @@ def inputPlayerLetter():
     # ocupa la segunda posición.
 
     # Desarrolle el cuerpo de la función aquí...
+    while True:
+        simbolo = input("Digite el simbolo con el que desea jugar (X o O)").upper()
+        if simbolo == "X" or simbolo == "O":
+            if simbolo == "X":
+                return ["X", "O"]# si el usuario ingresa x la computadora es 0
+            else:
+                return ["O", "X"] # si el usuario ingresa o la computadora es x
+
+            break
+
     pass
 
 def whoGoesFirst():
@@ -73,7 +91,6 @@ def whoGoesFirst():
 
 def makeMove(board, letter, move):
     # Esta función actualiza el estado del tablero.
-
     # Argumentos:
     # board: Lista de strings que almacena el estado del tablero.
     # letter: Es la marca que se desea poner en el tablero ("X" o "O").
@@ -119,6 +136,15 @@ def getPlayerMove(board):
 
 
     # Desarrolle el cuerpo de la función aquí...
+
+    while True:
+        move = input("Elige una casilla (1-9): ")
+        if move.isdigit():
+            move = int(move)
+            if 1 <= move <= 9 and board[move-1] == " ":
+                board[move-1] = inputPlayerLetter   # asigna X u O en la casilla
+                break
+        print("Casilla inválida u ocupada, intenta de nuevo.")
     pass
 
 def chooseRandomMoveFromList(board, movesList):

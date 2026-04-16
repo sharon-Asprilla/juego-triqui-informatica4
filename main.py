@@ -9,13 +9,10 @@ turn ="" # Indica quién tiene el turno para jugar, el usuario o la computadora.
 while True:
 
     # 2. Crear el tablero
-    tablero = [' '] * 9
+    board = [' '] * 9
     # 3. El usuario debe seleccionar la marca
-    
     t.inputPlayerLetter()
     # 4. Quién va primero el usuario o la computadora?
-
-
     print(turn + ' va primero.')
 
     jugando = True # El juego ha iniciado
@@ -24,7 +21,7 @@ while True:
         if turn == 'Usuario': # 5. Turno del usuario
 
             # a. Mostrar tablero
-            t.drawBoard(tablero)
+            t.drawBoard(board)
             # b. Pedir jugada al usuario
             # c. Actualizar el tablero
 
