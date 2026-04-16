@@ -139,7 +139,7 @@ def getPlayerMove(board):
 
     while True:
         move = input("Elige una casilla (1-9): ")
-        if move.isdigit():
+        if move.isdigit(): #Verifica que lo que escribió el jugador sea un número (no letras ni símbolos), y si no es un numero salta una casilla
             move = int(move)
             if 1 <= move <= 9 and board[move-1] == " ":
                 board[move-1] = inputPlayerLetter   # asigna X u O en la casilla
