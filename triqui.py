@@ -28,11 +28,20 @@ def printIntro(introFile):
     # Desarrolle el cuerpo de la función aquí...
 
     #"comentarios mios" se abre  el archivo con with palabra reseveda que hace que cierre el codigo  en modo lectura ("r") usando codificación UTF-8
-    # aqui permite leer correctamente los caracteres especiales del banner ASCII
-    with open(introFile, "r", encoding="utf-8") as archivo:
-        # se lee con la funcion read  todo el contenido del archivo y lo guardamos en la variable 'contenido'
-        contenido = archivo.read()
+    # aqui permite leer correctamente los caracteres especiales del banner 
+    
+    #otra forma de poderlo abrir
+    # with open(introFile, "r", encoding="utf-8") as archivo:
+    #  contenido = archivo.read()
+    # print(contenido)
+
+
+    file = open("./intro.txt","r", encoding="utf-8")
+    contenido = file.read()
+    file.close()
     print(contenido)
+
+
 
 
     pass
@@ -45,12 +54,15 @@ def drawBoard(board):
     # Desarrolle el cuerpo de la función aquí...
 
    
-    print(f"| {board[0]} | {board[1]} | {board[2]} |")
+    print(f"| {board[6]} | {board[7]} | {board[8]} |")
     print("-------------")
     print(f"| {board[3]} | {board[4]} | {board[5]} |")
     print("-------------")
-    print(f"| {board[6]} | {board[7]} | {board[8]} |")
+    print(f"| {board[0]} | {board[1]} | {board[2]} |")
     return [" "] * 9
+
+    
+
 
   
 
@@ -87,6 +99,11 @@ def whoGoesFirst():
     # el string "Computadora" si la computadora inicia el juego.
 
     # Desarrolle el cuerpo de la función aquí...
+    if random.randint(0, 1) == 0:
+        return "Usuario" # si es 0 empieza el usuario
+    else:
+        return "Computadora" # y si es uno empieza la computadora
+        
     pass
 
 def makeMove(board, letter, move):
@@ -97,6 +114,7 @@ def makeMove(board, letter, move):
     # move: Es el número de la casilla donde se desea poner la marca.
 
     # Desarrolle el cuerpo de la función aquí...
+    
     pass
 
 def isWinner(board, letter):
