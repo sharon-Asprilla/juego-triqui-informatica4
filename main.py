@@ -10,8 +10,10 @@ while True:
 
     # 2. Crear el tablero
     board = [' '] * 9
+    
     # 3. El usuario debe seleccionar la marca
     t.inputPlayerLetter()
+    
     # 4. Quién va primero el usuario o la computadora?
     print(turn + ' va primero.')
 
@@ -22,6 +24,8 @@ while True:
 
             # a. Mostrar tablero
             t.drawBoard(board)
+            break # aqui imprime el tablero sin el break lo imprime infinito 
+
             # b. Pedir jugada al usuario
             # c. Actualizar el tablero
 

@@ -64,8 +64,6 @@ def drawBoard(board):
     
 
 
-  
-
 
     pass
 
@@ -81,7 +79,7 @@ def inputPlayerLetter():
 
     # Desarrolle el cuerpo de la función aquí...
     while True:
-        simbolo = input("Digite el simbolo con el que desea jugar (X o O)").upper()
+        simbolo = input("Digite el simbolo con el que desea jugar con el que se identifica (X o O)").upper()
         if simbolo == "X" or simbolo == "O":
             if simbolo == "X":
                 return ["X", "O"]# si el usuario ingresa x la computadora es 0
@@ -114,6 +112,11 @@ def makeMove(board, letter, move):
     # move: Es el número de la casilla donde se desea poner la marca.
 
     # Desarrolle el cuerpo de la función aquí...
+    board[move] = letter
+    return board
+
+
+
     
     pass
 
@@ -128,6 +131,22 @@ def isWinner(board, letter):
     # debe retornar el valor lógico False, si no hay una jugada ganadora.
 
     # Desarrolle el cuerpo de la función aquí...
+    ganadora_1 = board[0] == board[1] == board[2] == letter
+    ganadora_2 = board[3] == board[4] == board[5] == letter
+    ganadora_3 = board[6] == board[7] == board[8] == letter
+    ganadora_4 = board[0] == board[3] == board[6] == letter
+    ganadora_5 = board[1] == board[4] == board[7] == letter
+    ganadora_6 = board[2] == board[5] == board[8] == letter
+    ganadora_7 = board[0] == board[4] == board[8] == letter
+    ganadora_8 = board[2] == board[4] == board[6] == letter
+
+    # Verificar si alguna jugada es verdadera
+    if (ganadora_1 or ganadora_2 or ganadora_3 or
+        ganadora_4 or ganadora_5 or ganadora_6 or
+        ganadora_7 or ganadora_8):
+        return True
+    else:
+        return False
     pass
 
 def isSpaceFree(board, move):
@@ -141,6 +160,17 @@ def isSpaceFree(board, move):
     # en caso contrario, debe retornar el valor lógico False.
 
     # Desarrolle el cuerpo de la función aquí...
+
+
+    # una casilla vacia se representa con un espacio " "
+    casilla_vacia = " "
+
+    # verificacion de que + si la casilla elegida está vacía
+    if board[move - 1] == casilla_vacia:
+        return True
+    else:
+        print("Elige otra casilla")
+        return False
     pass
 
 def getPlayerMove(board):
@@ -210,4 +240,9 @@ def isBoardFull(board):
     # En caso contrario debe retornar el valor lógico False.
 
     # Desarrolle el cuerpo de la función aquí...
+    if " " in board:
+        return False
+    else:
+        return True
+
     pass
