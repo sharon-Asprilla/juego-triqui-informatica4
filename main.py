@@ -27,6 +27,7 @@ while True:
             break # aqui imprime el tablero sin el break lo imprime infinito 
 
             # b. Pedir jugada al usuario
+            
             # c. Actualizar el tablero
 
             # d. Verificar si el usuario ha ganado el juego.
