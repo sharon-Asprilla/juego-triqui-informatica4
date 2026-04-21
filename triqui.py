@@ -54,23 +54,16 @@ def drawBoard(board):
     # Desarrolle el cuerpo de la función aquí...
 
    
-    print(f"| {board[6]} | {board[7]} | {board[8]} |")
+    print(f"| {board[7]} | {board[8]} | {board[9]} |")
     print("-------------")
-    print(f"| {board[3]} | {board[4]} | {board[5]} |")
+    print(f"| {board[4]} | {board[5]} | {board[6]} |")
     print("-------------")
-    print(f"| {board[0]} | {board[1]} | {board[2]} |")
-    return [" "] * 9
-
-    
-
-
+    print(f"| {board[1]} | {board[2]} | {board[3]} |")
+    return [" "] * 10
 
     pass
 
 def inputPlayerLetter():
-    
-
-
     # Esta función le permite escoger al usuario entre la letra "X" y la letra "O".
 
     # retorna una lista de strings donde la letra escogida por el usuario
@@ -131,16 +124,16 @@ def isWinner(board, letter):
     # debe retornar el valor lógico False, si no hay una jugada ganadora.
 
     # Desarrolle el cuerpo de la función aquí...
-    ganadora_1 = board[0] == board[1] == board[2] == letter
-    ganadora_2 = board[3] == board[4] == board[5] == letter
-    ganadora_3 = board[6] == board[7] == board[8] == letter
-    ganadora_4 = board[0] == board[3] == board[6] == letter
-    ganadora_5 = board[1] == board[4] == board[7] == letter
-    ganadora_6 = board[2] == board[5] == board[8] == letter
-    ganadora_7 = board[0] == board[4] == board[8] == letter
-    ganadora_8 = board[2] == board[4] == board[6] == letter
+    ganadora_1 = board[1] == board[2] == board[3] == letter
+    ganadora_2 = board[4] == board[5] == board[6] == letter
+    ganadora_3 = board[7] == board[8] == board[9] == letter
+    ganadora_4 = board[1] == board[4] == board[7] == letter
+    ganadora_5 = board[2] == board[5] == board[8] == letter
+    ganadora_6 = board[3] == board[6] == board[9] == letter
+    ganadora_7 = board[1] == board[5] == board[9] == letter
+    ganadora_8 = board[3] == board[5] == board[7] == letter
 
-    # Verificar si alguna jugada es verdadera
+    # ver si alguna jugada es verdadera
     if (ganadora_1 or ganadora_2 or ganadora_3 or
         ganadora_4 or ganadora_5 or ganadora_6 or
         ganadora_7 or ganadora_8):
@@ -166,7 +159,7 @@ def isSpaceFree(board, move):
     casilla_vacia = " "
 
     # verificacion de que + si la casilla elegida está vacía
-    if board[move - 1] == casilla_vacia:
+    if board[move] == casilla_vacia:
         return True
     else:
         print("Elige otra casilla")
@@ -187,13 +180,16 @@ def getPlayerMove(board):
 
     while True:
         move = input("Elige una casilla (1-9): ")
-        if move.isdigit(): #Verifica que lo que escribió el jugador sea un número (no letras ni símbolos), y si no es un numero salta una casilla
+        
+        # ver que lo que escribió el jugador sea un número, esto es una funcion
+        if move.isdigit():
             move = int(move)
-            if 1 <= move <= 9 and board[move-1] == " ":
-                board[move-1] = inputPlayerLetter   # asigna X u O en la casilla
-                break
+            # 
+            if 1 <= move <= 9 and board[move] == " ":
+                return move
+    
         print("Casilla inválida u ocupada, intenta de nuevo.")
-    pass
+
 
 def chooseRandomMoveFromList(board, movesList):
     # Esta función escoge de forma aleatoria una casilla vacía del tablero.
@@ -207,6 +203,19 @@ def chooseRandomMoveFromList(board, movesList):
     # esta función debe retornar el valor None.
 
     # Desarrolle el cuerpo de la función aquí...
+    # Guardamos las casillas libres
+    libres = []
+
+    # Revisamos una por una
+    for move in movesList:
+        if board[move] == " ":   # si está vacía
+            libres.append(move)  # la guardamos
+
+    # Si encontramos casillas libres
+    if libres:
+        return random.choice(libres)  # escogemos una al azar
+    else:
+        return None  # no hay movimientos disponibles
     pass
 
 def getComputerMove(board, computerLetter):
@@ -218,15 +227,44 @@ def getComputerMove(board, computerLetter):
 
     # Desarrolle el cuerpo de la función aquí...
 
+    # El otro jugador usa la letra contraria, entonces  le asigna una marca a la computadora 
+    if computerLetter == "X":
+        playerLetter = "O"
+    else:
+        playerLetter = "X"
+
     # 1. Verificar si la computadora puede ganar...
+    for i in range(1, 10):
+        if board[i] == " ":            # si la casilla está vacía
+            board[i] = computerLetter  # probar con la ficha de la computadora
+            if isWinner(board, computerLetter):
+                board[i] = " "         # quitamos la ficha después de probar
+                return i
+            board[i] = " "             # si no gana, la dejamos vacía otra vez
+
 
     # 2. Si no, verificar si el usuario puede ganar en la siguiente jugada, si si, bloquear esta jugada...
+    for i in range(1, 10):
+        if board[i] == " ":            # si la casilla está vacía
+            board[i] = playerLetter    # probar con la ficha del jugador
+            if isWinner(board, playerLetter):
+                board[i] = " "         # quitamos la ficha después de probar
+                return i
+            board[i] = " "             # si no gana, la dejamos vacía otra vez
 
     # 3. Si no, tratar de poner una marca en alguna de las esquinas, si alguna está vacía...
+    for i in [1, 3, 7, 9]:
+        if board[i] == " ":
+            return i
 
     # 4. Si no, tratar de marcar la casilla del centro, si esta está vacía...
+    if board[5] == " ":
+        return 5
 
     # 5. Si no, tratar de poner una marca en alguna de las casillas de los lados...
+    for i in [2, 4, 6, 8]:
+        if board[i] == " ":
+            return i
 
     pass
 
@@ -240,9 +278,19 @@ def isBoardFull(board):
     # En caso contrario debe retornar el valor lógico False.
 
     # Desarrolle el cuerpo de la función aquí...
-    if " " in board:
+    if " " in board[1:]: # toma todos los elementos desde la posicion 1 hasta el final 
         return False
     else:
         return True
 
-    pass
+        pass
+
+def playAgain():
+    # Esta función pregunta al usuario si desea jugar de nuevo.
+    # Retorna True si el usuario desea jugar de nuevo, False en caso contrario.
+    
+    respuesta = input(" quieres juegar de nuevo? ")
+    if respuesta == 'si':
+        return True
+    else:
+        return False
